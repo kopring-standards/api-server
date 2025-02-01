@@ -5,12 +5,15 @@
 ┣ 📜 build.gradle.kts                    # buildSrc 모듈의 빌드 스크립트
 ┣ 📜 settings.gradle.kts                 # Gradle 버전 카탈로그 정의
 ┗ 📂 src/main/kotlin                     # 필요 시 커스텀 Gradle 플러그인 정의 가능
+
 📦 demo-bootstrap (실행 모듈)
 ┣ 📜 build.gradle.kts                    # bootstrap 모듈에 적용할 의존성, 작업 등을 추가로 정의
 ┗ 📂 src/main/kotlin/com/demo/bootstrap  # 실행 클래스가 존재하는 위치
+
 📦 demo-common (공통코드 모듈)
 ┣ 📜 build.gradle.kts                    # common 모듈에 적용할 의존성, 작업 등을 추가로 정의
 ┗ 📂 src/main/kotlin/com/demo/common     # 도메인 모듈이 사용할 공통 코드를 작성한 모듈
+
 📦 demo-domain1 (도메인 모듈)
 ┣ 📜 build.gradle.kts                    # 도메인 모듈에 적용할 의존성, 작업 등을 추가로 정의
 ┗ 📂 src/main/kotlin/com/demo/domain1
@@ -19,6 +22,7 @@
     ┗ 📂 persistence                     # 영속성
     ┗ 📂 service                         # 도메인 서비스
     ┗ 📂 usecase                         # API 사용사례
+
 📦 demo-domain2 (도메인 모듈)
 ┣ 📜 build.gradle.kts                    # 도메인 모듈에 적용할 의존성, 작업 등을 추가로 정의
 ┗ 📂 src/main/kotlin/com/demo/domain2
@@ -27,6 +31,7 @@
     ┗ 📂 persistence                     # 영속성
     ┗ 📂 service                         # 도메인 서비스
     ┗ 📂 usecase                         # API 사용사례
+
 📦 gradle (버전 카탈로그)
     ┗ 📜 libs.versions.toml              # Gradle의 버전 카탈로그를 관리하는 파일
 ```
