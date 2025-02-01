@@ -61,10 +61,12 @@ kafka:
   dlt:
     administrators:
     ui:
-      prod:
-        base-url: "http://mis-manage.smilegate.net:10001"
+      local:
+        base-url: "http://localhost:10000"
       dev:
-        base-url: "http://kafka.dev-mis-manage.smiledev.net"
+        base-url: "http://localhost:10000"
+      prod:
+        base-url: "http://localhost:10000"
       path: "/ui/clusters/kafka_cluster/all-topics/%s/messages?limit=100&mode=LATEST"
 
 ## TODO : 프론트, 전자결재 JWT 토큰 방식으로 변경 개발 완료되면, 아래의 Key 는 삭제되고 서버에서 환경변수 적용됩니다.
