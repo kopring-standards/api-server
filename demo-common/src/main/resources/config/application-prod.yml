@@ -1,0 +1,33 @@
+spring:
+  config:
+    import: "classpath:/config/application-default.yml"
+    use-legacy-processing: true
+    activate:
+      on-profile: dev
+    jpa:
+      properties:
+        hibernate:
+          format_sql: true
+          highlight_sql: true
+          use_sql_comments: true
+
+  # MSSQL DB & Hikari DBCP 설정
+  datasource:
+    master:
+      hikari:
+        pool-name: "tlmApp-master"
+        driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+        jdbc-url: "jdbc:sqlserver://10.125.111.134:1433;databaseName=EP_BE_TLM_ADMIN;encrypt=false;sendStringParametersAsUnicode=false"
+        username: ENC(uT42xBcJ4NlyQG2cflBnIg==)
+        password: ENC(VCTnWiQRLP6keok5zek4kCUvJoSuVQ6K)
+        maximum-pool-size: 50
+        read-only: false
+
+  data:
+    redis:
+      host: localhost.net
+      port: 6379
+
+  # Kafka Bootstrap
+  kafka:
+    bootstrap-servers: localhost:9092

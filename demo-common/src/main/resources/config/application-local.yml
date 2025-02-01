@@ -1,0 +1,31 @@
+spring:
+  config:
+    import: "classpath:/config/application-default.yml"
+    use-legacy-processing: true
+    activate:
+      on-profile: local
+    jpa:
+      properties:
+        hibernate:
+          format_sql: true
+          highlight_sql: true
+          use_sql_comments: true
+
+  datasource:
+    master:
+      hikari:
+        pool-name: "demoApp-master"
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: "jdbc:mysql://localhost:3306"
+        username: root
+        password: root
+        maximum-pool-size: 50
+        read-only: false
+
+  data:
+    redis:
+      host: localhost.net
+      port: 6379
+
+  kafka:
+    bootstrap-servers: localhost:9092

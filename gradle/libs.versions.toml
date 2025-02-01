@@ -1,0 +1,172 @@
+# 버전 선언
+[versions]
+springBoot = "3.4.2"
+springDependencyManagement = "1.1.7"
+kotlinPlugin = "1.9.25"
+ktLintPlugin = "12.1.1"
+gradleBuildScanPlugin = "3.18.1"
+springCloud = "2024.0.0"
+jaxb = "2.3.1"
+javaVersion = "21"
+springdoc = "2.5.0"
+redisson = "3.27.0"
+aws = "1.11.238"
+kotlinLogging = "3.0.5"
+mockitoKotlin = "5.4.0"
+caffeine = "3.1.8"
+opentelemetry = "1.36.0"
+opentelemetryBom = "2.6.0"
+
+# Gradle 플러그인 선언
+[plugins]
+spring-boot = { id = "org.springframework.boot", version.ref = "springBoot" }
+spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "springDependencyManagement" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlinPlugin" }
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlinPlugin" }
+kotlin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlinPlugin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlinPlugin" }
+kotlin-lint = { id = "org.jlleitschuh.gradle.ktlint", version.ref = "ktLintPlugin" }
+gradle-develocity = { id = "com.gradle.develocity", version.ref = "gradleBuildScanPlugin" }
+
+[libraries]
+# Kotlin 관련 라이브러리
+kotlin-jackson = { group = "com.fasterxml.jackson.module", name = "jackson-module-kotlin" }
+kotlin-reflect = { group = "org.jetbrains.kotlin", name = "kotlin-reflect" }
+kotlin-logging = { group = "io.github.microutils", name = "kotlin-logging-jvm", version.ref = "kotlinLogging" }
+
+# Spring Framework 코어 라이브러리
+spring-transaction = { group = "org.springframework", name = "spring-tx" }
+spring-kafka = { group = "org.springframework.kafka", name = "spring-kafka" }
+
+# Spring Boot Starters
+spring-boot-starter-autoconfigure = { group = "org.springframework.boot", name = "spring-boot-autoconfigure" }
+spring-boot-starter-web = { group = "org.springframework.boot", name = "spring-boot-starter-web" }
+spring-boot-starter-aop = { group = "org.springframework.boot", name = "spring-boot-starter-aop" }
+spring-boot-starter-actuator = { group = "org.springframework.boot", name = "spring-boot-starter-actuator" }
+spring-boot-starter-validation = { group = "org.springframework.boot", name = "spring-boot-starter-validation" }
+spring-boot-starter-cache = { group = "org.springframework.boot", name = "spring-boot-starter-cache" }
+spring-boot-starter-jpa = { group = "org.springframework.boot", name = "spring-boot-starter-data-jpa" }
+spring-boot-starter-redis = { group = "org.springframework.boot", name = "spring-boot-starter-data-redis" }
+spring-boot-starter-security = { group = "org.springframework.boot", name = "spring-boot-starter-security" }
+spring-boot-starter-oauth2-client = { group = "org.springframework.boot", name = "spring-boot-starter-oauth2-client" }
+spring-boot-starter-mongodb = { group = "org.springframework.boot", name = "spring-boot-starter-data-mongodb" }
+spring-boot-starter-amqp = { group = "org.springframework.boot", name = "spring-boot-starter-amqp" }
+
+# Spring Cloud 컴포넌트
+#spring-cloud-feign = { group = "org.springframework.cloud", name = "spring-cloud-starter-openfeign" }
+#spring-cloud-gateway = { group = "org.springframework.cloud", name = "spring-cloud-starter-gateway-mvc" }
+#spring-cloud-eureka-server = { group = "org.springframework.cloud", name = "spring-cloud-starter-netflix-eureka-server" }
+#spring-cloud-eureka-client = { group = "org.springframework.cloud", name = "spring-cloud-starter-netflix-eureka-client" }
+#spring-cloud-resilience4j = { group = "org.springframework.cloud", name = "spring-cloud-starter-circuitbreaker-resilience4j" }
+
+# 문서화
+spring-boot-docs = { group = "org.springdoc", name = "springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc" }
+
+# 모니터링 및 추적
+micrometer-brave = { group = "io.micrometer", name = "micrometer-tracing-bridge-brave" }
+zipkin-brave = { group = "io.zipkin.reporter2", name = "zipkin-reporter-brave" }
+micrometer-prometheus = { group = "io.micrometer", name = "micrometer-registry-prometheus" }
+# opentelemetry-starter = { group = "io.opentelemetry.instrumentation", name = "opentelemetry-spring-boot-starter", version.ref = "opentelemetry" }
+
+# 데이터베이스 드라이버
+mysql = { group = "com.mysql", name = "mysql-connector-j" }
+postgresql = { group = "org.postgresql", name = "postgresql" }
+mariadb = { group = "org.mariadb.jdbc", name = "mariadb-java-client" }
+h2 = { group = "com.h2database", name = "h2" }
+
+# 캐시
+spring-boot-starter-redisson = { group = "org.redisson", name = "redisson-spring-boot-starter", version.ref = "redisson" }
+caffeine = { group = "com.github.ben-manes.caffeine", name = "caffeine", version.ref = "caffeine" }
+
+# AWS 및 유틸리티
+aws-sdk-s3 = { group = "com.amazonaws", name = "aws-java-sdk-s3", version.ref = "aws" }
+jaxb-api = { group = "javax.xml.bind", name = "jaxb-api", version.ref = "jaxb" }
+jaxb-runtime = { group = "org.glassfish.jaxb", name = "jaxb-runtime", version.ref = "jaxb" }
+
+# 개발 도구
+spring-boot-annotation-processor = { group = "org.springframework.boot", name = "spring-boot-configuration-processor" }
+spring-boot-devtools = { group = "org.springframework.boot", name = "spring-boot-devtools" }
+spring-boot-docker-compose = { group = "org.springframework.boot", name = "spring-boot-docker-compose" }
+
+# 테스트 관련
+spring-boot-starter-test = { group = "org.springframework.boot", name = "spring-boot-starter-test" }
+kotlin-junit5 = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit5" }
+junit = { group = "org.junit.platform", name = "junit-platform-launcher" }
+mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlin" }
+
+# 번들 정의
+[bundles]
+common = [
+    #"zipkin-brave",
+    "kotlin-reflect",
+    "kotlin-jackson",
+    "kotlin-logging",
+    "micrometer-brave",
+    "micrometer-prometheus",
+    #"opentelemetry-starter",
+    "spring-boot-starter-actuator",
+    "spring-boot-starter-validation",
+    "spring-boot-starter-autoconfigure",
+]
+
+web = [
+    "spring-boot-docs",
+    "spring-boot-starter-web",
+    "spring-boot-starter-aop",
+    #"spring-boot-starter-security",
+    #"spring-boot-starter-oauth2-client"
+]
+
+service = [
+    "spring-transaction",
+]
+
+persistence = [
+    "h2",
+    "mysql",
+    "mariadb",
+    "postgresql",
+    "spring-boot-starter-jpa",
+    "spring-boot-starter-mongodb",
+]
+
+cache = [
+    "caffeine",
+    "spring-boot-starter-cache",
+    "spring-boot-starter-redis",
+    "spring-boot-starter-redisson",
+]
+
+storage = [
+    "aws-sdk-s3",
+]
+
+dataStreaming = [
+    "spring-kafka",
+    "spring-boot-starter-amqp",
+]
+
+#cloudNative = [
+#    "spring-cloud-resilience4j",
+#    "spring-cloud-feign",
+#    "spring-cloud-gateway",
+#    "spring-cloud-resilience4j",
+#    "spring-cloud-eureka-server",
+#    "spring-cloud-eureka-client",
+#]
+
+test = [
+    "junit",
+    "kotlin-junit5",
+    "mockito-kotlin",
+    "spring-boot-starter-test",
+    "spring-boot-docker-compose"
+]
+
+devTools = [
+    "jaxb-api",
+    "jaxb-runtime",
+    "spring-boot-devtools",
+    "spring-boot-docker-compose",
+    "spring-boot-annotation-processor",
+]

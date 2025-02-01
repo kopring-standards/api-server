@@ -1,0 +1,125 @@
+logging:
+  config: "classpath:logback-spring.xml"
+
+# 구동 Port
+server:
+  port: 8080
+
+spring:
+  application:
+    name: demo-app
+  jpa:
+    open-in-view: false
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 1GB
+  messages:
+    cache-duration: 3600
+    encoding: UTF-8
+  cache:
+    type: redis
+
+  # 카프카 관련 공통코드
+  kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      compression-type: zstd
+      acks: all
+      retries: 3
+      properties:
+        enable.idempotence: true
+        transactional.id: tx-${TX_ID:unknown-transaction}
+        message.key: ${TX_ID:unknown-producer}
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.json.trusted.packages: com.demo.common.datastreaming.kafka.event
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        partition.assignment.strategy: >
+          org.apache.kafka.clients.consumer.CooperativeStickyAssignor,
+          org.apache.kafka.clients.consumer.StickyAssignor
+        isolation.level: read_committed
+        enable.auto.commit: false
+        auto.offset.reset: earliest
+        max.poll.records: 1
+        group.instance.id: ${STATIC_INSTANCE_ID:unknown-consumer-static-group}
+
+kafka:
+  consumer:
+    auto-startup: ${KAFKA_CONSUMER_AUTO_STARTUP:false}
+    static-instance-id: ${STATIC_INSTANCE_ID}
+
+  # DLT 정책
+  error-handler:
+    dlt-postfix: ".DLT"
+    retry-interval: 3000
+    max-retry-attempts: 5
+
+  dlt:
+    administrators:
+    ui:
+      prod:
+        base-url: "http://mis-manage.smilegate.net:10001"
+      dev:
+        base-url: "http://kafka.dev-mis-manage.smiledev.net"
+      path: "/ui/clusters/kafka_cluster/all-topics/%s/messages?limit=100&mode=LATEST"
+
+## TODO : 프론트, 전자결재 JWT 토큰 방식으로 변경 개발 완료되면, 아래의 Key 는 삭제되고 서버에서 환경변수 적용됩니다.
+jwt:
+  privateKey: "UNKNOWN"
+  publicKey: "UNKNOWN"
+
+## CORS
+#cors:
+#  allowed-origin-patterns: "*"
+#  allowed-methods: GET, POST, PUT, PATCH, DELETE, OPTIONS
+#  allowed-headers: "*"
+#  exposed-headers: "Content-Disposition"
+
+## Springdoc Swagger
+#springdoc:
+#  swagger-ui:
+#    enabled: true
+#    display-request-duration: true
+#    path: /
+#    disable-swagger-default-url: true
+#    operations-sorter: method
+#    tags-sorter: alpha
+#  api-docs:
+#    enabled: true
+#    resolve-schema-properties: true
+#  default-consumes-media-type: application/json
+#  default-produces-media-type: application/json
+#  paths-to-match: "/**"
+#  packages-to-scan: com.demo
+
+# Jasypt
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+
+# Actuator 보안 설정
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+    jmx:
+      exposure:
+        exclude: '*'
+    access:
+      default: none
+  endpoint:
+    health:
+      show-details: never
+      access: unrestricted
+    info:
+      enabled: false
+  health:
+    db:
+      enabled: false
+    redis:
+      enabled: false
