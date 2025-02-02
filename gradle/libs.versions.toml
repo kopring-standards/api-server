@@ -127,7 +127,7 @@ persistence = [
     "mariadb",
     "postgresql",
     "spring-boot-starter-jpa",
-    "spring-boot-starter-mongodb",
+    #"spring-boot-starter-mongodb",
 ]
 
 cache = [

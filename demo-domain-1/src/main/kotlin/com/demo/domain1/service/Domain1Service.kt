@@ -1,5 +1,6 @@
 package com.demo.domain1.service
 
+import com.demo.domain1.controller.dto.SuccessMockData
 import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.CachePut
 import org.springframework.cache.annotation.Cacheable
@@ -10,6 +11,18 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 @Transactional
 class Domain1Service {
+    @Cacheable(
+        cacheNames = ["staticDataCache"],
+        key = "#id + '_' + #name",
+        unless = "#result == null",
+    )
+    fun getStaticData(
+        id: Long,
+        name: String,
+    ): SuccessMockData {
+        return SuccessMockData(id = id, name = name)
+    }
+
     /**
      * 정적 데이터 캐시 사용 예시 (카테고리 정보)
      */

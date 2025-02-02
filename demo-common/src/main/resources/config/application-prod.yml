@@ -23,10 +23,16 @@ spring:
         maximum-pool-size: 50
         read-only: false
 
+  # REDIS
   data:
     redis:
-      host: localhost.net
+      host: localhost
       port: 6379
+      timeout: 1000
+      retry:
+        max-attempts: 2   # 최대 재시도 횟수
+      pool:
+        netty-threads: 10  # Netty 스레드 풀 크기
 
   # Kafka Bootstrap
   kafka:

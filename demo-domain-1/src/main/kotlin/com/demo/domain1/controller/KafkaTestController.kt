@@ -14,7 +14,7 @@ import java.util.UUID
 @RestController
 @RequestMapping("/api/kafka")
 @Transactional
-class Domain1Controller(
+class KafkaTestController(
     private val demoKafkaProducer: DemoKafkaProducer,
 ) {
     // 기본 메시지 발행 테스트 (키와 헤더 없음)

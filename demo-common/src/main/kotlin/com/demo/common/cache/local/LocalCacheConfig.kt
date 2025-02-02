@@ -1,24 +1,19 @@
 package com.demo.common.cache.local
 
 import com.github.benmanes.caffeine.cache.Caffeine
-import org.slf4j.LoggerFactory
 import org.springframework.cache.CacheManager
 import org.springframework.cache.annotation.EnableCaching
 import org.springframework.cache.caffeine.CaffeineCache
 import org.springframework.cache.support.SimpleCacheManager
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import org.springframework.scheduling.annotation.EnableScheduling
-import org.springframework.scheduling.annotation.Scheduled
-import org.springframework.stereotype.Component
 import java.time.Duration
-import java.util.function.Consumer
 
 @Configuration
 @EnableCaching
-class CacheConfig {
+class LocalCacheConfig {
     @Bean
-    fun cacheManager(): CacheManager {
+    fun localCacheManager(): CacheManager {
         val cacheManager = SimpleCacheManager()
         val caches: MutableList<CaffeineCache> = ArrayList()
 
@@ -93,54 +88,5 @@ class CacheConfig {
                 .recordStats()
                 .build(),
         )
-    }
-
-    /**
-     * 캐시 모니터링을 위한 메트릭 수집
-     */
-    @Component
-    class CacheMonitor(private val cacheManager: CacheManager) {
-        @Scheduled(fixedRate = 60000) // 1분마다 실행
-        fun monitorCache() {
-            val cacheNames = cacheManager.cacheNames
-
-            cacheNames.forEach(
-                Consumer { cacheName: String? ->
-                    val cache = cacheManager.getCache(cacheName!!)
-                    if (cache is CaffeineCache) {
-                        val nativeCache = cache.nativeCache
-
-                        val stats = nativeCache.stats()
-
-                        log.info(
-                            """
-                            Cache '{}' Statistics:
-                            ================================
-                            Hit Count: {}
-                            Miss Count: {}
-                            Hit Rate: {}%
-                            Eviction Count: {}
-                            ================================
-                            
-                            """.trimIndent(),
-                            cacheName,
-                            stats.hitCount(),
-                            stats.missCount(),
-                            String.format("%.2f", stats.hitRate() * 100),
-                            stats.evictionCount(),
-                        )
-                    }
-                },
-            )
-        }
-    }
-
-    // 스케줄러 활성화를 위한 설정
-    @Configuration
-    @EnableScheduling
-    inner class SchedulingConfig
-
-    private companion object {
-        private val log = LoggerFactory.getLogger(CacheConfig::class.java)
     }
 }
